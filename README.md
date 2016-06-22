@@ -7,3 +7,17 @@ This package is based on these papers
 - C. Francq. & J.M. Zakoian, Joint inference on market and estimation risks in dynamic portfolios 
 
 All these papers are available at [http://perso.univ-lille3.fr/~cfrancq](http://perso.univ-lille3.fr/~cfrancq,"Christian Francq's homepage")
+
+# Installation
+
+The package can be installed via this command in a R console
+```R
+install_github(EbEEMGARCH, TaoussD)
+``` 
+
+# Authors
+
+D. Taouss & C. Francq
+
+
+
