@@ -12,8 +12,9 @@ All these papers are available at [http://perso.univ-lille3.fr/~cfrancq](http://
 
 # Installation
 
-The package can be installed via this command in a R console
+The package can be installed via this command in a R console (devtools is required)
 ```R
+library(devtools)
 install_github(EbEEMGARCH, TaoussD)
 ``` 
 
