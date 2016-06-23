@@ -14,15 +14,17 @@ All these papers are available at [http://perso.univ-lille3.fr/~cfrancq](http://
 
 ## Installation
 
-The package can be installed from the sources available on the repo via this command in a R console ([devtools](https://github.com/hadley/devtools) and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) are required)
+The package can be installed from the sources available on the repo via this command in a R console ([devtools](https://github.com/hadley/devtools), [Rcpp](https://github.com/RcppCore/Rcpp/) and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) are required)
 ```R
+library(Rcpp)
 library(devtools)
-install_github("EbEEMGARCH", "TaoussD")
+install_github("TaoussD/EbEEMGARCH")
 ``` 
 
-devtools can be easily installed in a R console
+devtools and Rcpp can be easily installed in a R console (available on CRAN)
 ```R
 install.packages("devtools")
+install.packages("Rcpp")
 ```
 
 
