@@ -1,5 +1,6 @@
 # EbEEMGARCH
 *Package in development*
+
 R package to estimate MGARCH(1,1) model equation by equation
 
 This package provides various tools to simulate and estimate MGARCH(1,1) models
