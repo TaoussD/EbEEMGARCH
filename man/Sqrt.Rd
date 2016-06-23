@@ -1,25 +1,20 @@
-\name{Mgarch.sim}
-\alias{Mgarch.sim}
+\name{Sqrt}
+\alias{Sqrt}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Simulation of diagonal Multivariate GARCH
+\title{Square root of a symetric semi-definite positive matrix
 %%  ~~function to do ... ~~
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
-Fonction to simulate data from full diagonal MGARCH(1,1) model
 \usage{
-Mgarch.sim(n, omega, alpha, beta, R, nu = Inf, valinit = 500)
+Sqrt(A)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{n}{Number of observation}
-  \item{omega}{Vector Omega}
-  \item{alpha}{Vector of the diagonal of Alpha}
-  \item{beta}{Vector of the diagonal of Beta}
-  \item{R}{Correlation matrix}
-  \item{nu}{??}
-  \item{valinit}{Burn-in}
+  \item{A}{symetric semi-definite positive matrix
+%%     ~~Describe \code{A} here~~
+}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -30,7 +25,7 @@ Mgarch.sim(n, omega, alpha, beta, R, nu = Inf, valinit = 500)
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-dataframe of the observations
+\item
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -49,15 +44,9 @@ dataframe of the observations
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-Omega0 <- rep(0.01, m)
-Alpha0 <- rep(0.05, m)
-Beta0 <- rep(0.90, m)
-R0 <- diag(rep(1, m))
-
-Epsi <- Mgarch.sim(n = 2500, omega = Omega0, alpha = Alpha0, beta = Beta0, R.mat = R0, nu = Inf, valinit = 500)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ Simulation }
-\keyword{ MGARCH }% __ONLY ONE__ keyword per line
+\keyword{ ~matrix }
+\keyword{ ~square-root }% __ONLY ONE__ keyword per line

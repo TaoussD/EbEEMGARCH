@@ -15,7 +15,7 @@ estim.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
   \item{Omega}{Initialisation parameter for Omega
 %%     ~~Describe \code{x} here~~
 }
-  \item{Alpha}{Initialisation parameter for Alpha
+  \item{Alpha}{Initialisation parameter for Alpha, must be a matrix if you are using the "sdiagonal" model
 %%     ~~Describe \code{x} here~~
 }
   \item{Beta}{Initialisation parameter for Beta
@@ -42,7 +42,7 @@ estim.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 \item{Omega}{Estimation of Omega}
-\item{Alpha}{Estimation of Alpha}
+\item{Alpha}{Estimation of Alpha1}
 \item{Beta}{Estimation of Beta}
 \item{R}{Estimation of R, the correlation matrix}
 }
@@ -61,6 +61,7 @@ D. Taouss, C. Francq
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
+\code{\link{EbEEMGARCH}}{  Homepage of the documentation}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
@@ -99,8 +100,7 @@ estim.EbEE.Mgarch11(omegainit,alphainit,betainit,Epsi,r=10,model="sdiagonal")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ MGARCH }
-
-\keyword{ CCC model }% __ONLY ONE__ keyword per line
-\keyword{ DCC model }% __ONLY ONE__ keyword per line
+\keyword{ ~MGARCH }
+\keyword{ ~CCC model }% __ONLY ONE__ keyword per line
+\keyword{ ~DCC model }% __ONLY ONE__ keyword per line
 
