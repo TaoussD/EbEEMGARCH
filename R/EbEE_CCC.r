@@ -1,14 +1,8 @@
 library(compiler)
 library(Rcpp)
-library(rbenchmark)
-
 
 ############ FONCTIONS ANNEXES ############
 #Fonction c++ pour accéléer
-
-#fast <- function() {
- #   sourceCpp("C:/Users/Dimitri/Documents/2A/Stages/CFrancq/Code/RVisual/RVisual/Source1.cpp", verbose = TRUE)
-#}
 
 #racine carree d'un matrice symetrique semi-definie positive
 Sqrt <- function(Sigma) {
@@ -142,7 +136,7 @@ estimMgarch.sdiag <- function(omega, Alpha, beta, eps0, Ht, r) {
 
 # estime EbE un MGARCH(1,1)-CCC diagonal 
 
-estim.EbEE.Mgarch11 <- function(Omega, Alpha, Beta, eps, r = 10, model) {
+estim.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
     if (model == "diagonal") 
         {
         #fast()
@@ -161,7 +155,7 @@ estim.EbEE.Mgarch11 <- function(Omega, Alpha, Beta, eps, r = 10, model) {
                 Res[, j] <- res$eta
             }
         R <- cor(Res)
-        list(Omega=Omega.est, Alpha=Alpha.est, Beta=Beta.est, R=vech0(R))
+        list(Omega=Omega.est, Alpha=Alpha.est, Beta=Beta.est, R=R)
         }
 
         else 
