@@ -1,9 +1,9 @@
 # EbEEMGARCH
-*Package in development*
+*Package under development*
 
 R package to estimate MGARCH(1,1) model equation by equation
 
-This package provides various tools to simulate and estimate MGARCH(1,1) models
+This package provides various tools to simulate and estimate MGARCH(1,1) models. After, I will include tools to estimate VaR of financial series who follow MGARCH models.
 
 
 This package is based on these papers
@@ -20,14 +20,21 @@ library(devtools)
 install_github(EbEEMGARCH, TaoussD)
 ``` 
 
+devtools can be easily installed in a R console
+```R
+install.packages("devtools")
+```
+
 ## Methods
 
 All of the methods listed under are documented directly in a R console through R help
 
 - estim.EBEE : Estimation of the parameters of a MGARCH(1,1) model equation by equation
 - mgarch.sim : Simulation of MGARCH(1,1) full diagonal 
+- vech0 : vech0 operator
+- Sqrt : Square root of a symetric semi-definite positive matrix
 
-*More methods are in development*
+*More methods are under ndevelopment*
 
 ## Authors
 
