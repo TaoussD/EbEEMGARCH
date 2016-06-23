@@ -35,7 +35,7 @@ All of the methods listed under are documented directly in a R console through R
 - vech0 : vech0 operator
 - Sqrt : Square root of a symetric semi-definite positive matrix
 
-*More methods are under ndevelopment*
+*More methods are under development*
 
 ## Authors
 
