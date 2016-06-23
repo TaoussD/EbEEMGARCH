@@ -14,7 +14,7 @@ All these papers are available at [http://perso.univ-lille3.fr/~cfrancq](http://
 
 ## Installation
 
-The package can be installed via this command in a R console ([devtools](https://github.com/hadley/devtools) is required)
+The package can be installed from the sources available on the repo via this command in a R console ([devtools](https://github.com/hadley/devtools) and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) are required)
 ```R
 library(devtools)
 install_github(EbEEMGARCH, TaoussD)
@@ -24,6 +24,7 @@ devtools can be easily installed in a R console
 ```R
 install.packages("devtools")
 ```
+
 
 ## Methods
 
