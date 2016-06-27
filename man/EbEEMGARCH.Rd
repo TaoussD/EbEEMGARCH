@@ -4,7 +4,7 @@
 \title{Estimation of MGARCH(1,1) models
 %%  ~~function to do ... ~~
 }
-\description{The EbEE package provides several tools to sample or estimate MGARCH(1,1) models
+\description{This package provides several tools to sample or estimate MGARCH(1,1) models equation by equation
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 
