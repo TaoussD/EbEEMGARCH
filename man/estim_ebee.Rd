@@ -12,13 +12,13 @@ estim.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Omega}{Initialisation parameter for Omega
+  \item{Omega}{Initialisation parameter for Omega (vector)
 %%     ~~Describe \code{x} here~~
 }
-  \item{Alpha}{Initialisation parameter for Alpha, must be a matrix if you are using the "sdiagonal" model
+  \item{Alpha}{Initialisation parameter for Alpha (vector), must be a matrix if you are using the "sdiagonal" model
 %%     ~~Describe \code{x} here~~
 }
-  \item{Beta}{Initialisation parameter for Beta
+  \item{Beta}{Initialisation parameter for Beta (vector)
 %%     ~~Describe \code{x} here~~
 }
   \item{eps}{m*n matrix of the serie to be estimated
@@ -66,7 +66,7 @@ D. Taouss, C. Francq
 }
 \examples{
 ####
-# Sampling diagonal model
+# Sampling a diagonal model
 ####
 
 m <- 3 #Number of assets in the portfolio
@@ -75,7 +75,7 @@ Alpha0 <- rep(0.05, m)
 Beta0 <- rep(0.90, m)
 R0 <- diag(rep(1, m))
 
-Epsi <- Mgarch.sim(n = 2500, omega = Omega0, alpha = Alpha0, beta = Beta0, R.mat = R0, nu = Inf, valinit = 500)
+Epsi <- Mgarch.sim(2500, Omega0, Alpha0, Beta0,"diagonal", R0, "normal")
 
 
 ####
