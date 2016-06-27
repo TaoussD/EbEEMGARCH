@@ -35,8 +35,8 @@ D. Taouss & C. Francq
 \itemize{
 \item{\code{\link{Sqrt}}{  Square root of a symetric semi-definite positive matrix}}
 \item{\code{\link{vech0}}{  vech0 operator}}
-\item{\code{\link{Mgarch.sim}}{  Simulation of a MGARCH(1,1) diagonal }}
-\item{\code{\link{estim.EbEE}}{  Estimation of the parameters of a MGARCH(1,1) CCC diagonal and semi-diagonal equation by equation}}
+\item{\code{\link{Mgarch.sim}}{  Simulation of a MGARCH(1,1) CCC-diagonal or semi-diagonal }}
+\item{\code{\link{estim.EbEE}}{  Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal equation by equation}}
 %%  ~~further notes~~
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 }}
