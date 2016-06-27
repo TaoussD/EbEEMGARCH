@@ -28,21 +28,47 @@ vech0 <- function(A) {
 
 ############ SIMULATION ############
 # simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R.mat
-Mgarch.sim <- function(n, omega, alpha, beta, R.mat, nu = Inf, valinit = 500) {
+Mgarch.sim <- function(n, omega, alpha, beta, model,R.mat,bruit, nu = Inf, valinit = 500) {
     m <- length(omega)
     cst <- 1
-    if (nu > 2 & nu != Inf)
-        cst <- sqrt((nu - 2) / nu)
-    # eta <- matrix(cst*rt(m*(n+valinit),nu),ncol=m,nrow=(n+valinit))%*%t(Sqrt(R.mat))
+    if (bruit == "normal") 
+     {
+        eta <- matrix(rnorm(m * (n + valinit)), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R.mat))
+    }
+    else
+    {
+        
+        if (bruit == "student") {
+            if (nu > 2 & nu != Inf)
+                cst <- sqrt((nu - 2) / nu)
+            eta <- matrix(cst * rt(m * (n + valinit), nu), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R.mat))
+        }
+            else {
+                print("Not a valid noise")
+            }
+    }
     eta <- matrix(rnorm(m * (n + valinit)), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R.mat))
     eps <- matrix(0, nrow = n + valinit, ncol = m)
     ht <- matrix(0, nrow = n + valinit, ncol = m)
-
-    for (t in 2:(n + valinit)) {
-        ht[t,] <- omega + alpha * (eps[t - 1,] ^ 2) + beta * ht[t - 1,]
-        eps[t,] <- sqrt(ht[t,]) * eta[t,]
+    if (model == "diagonal") {
+        for (t in 2:(n + valinit)) {
+            ht[t,] <- omega + alpha * (eps[t - 1,] ^ 2) + beta * ht[t - 1,]
+            eps[t,] <- sqrt(ht[t,]) * eta[t,]
+        }
     }
+    else {
+        if (model == "sdiagonal") {
+            for (t in 2:(n + valinit)) {
+                ht[t,] <- omega + alpha %*% (eps[t - 1,] ^ 2) + beta * ht[t - 1,]
+                eps[t,] <- sqrt(ht[t,]) * eta[t,]
+            }
+        }
+        else {
+            print("Not a valid model")
 
+            }
+
+    }
     return(as.data.frame(eps[(valinit + 1):(n + valinit),]))
 }
 
@@ -55,9 +81,7 @@ Alpha0 <- rep(0.05, m)
 Beta0 <- rep(0.90, m)
 R0 <- diag(rep(1, m))
 
-Epsi <- Mgarch.sim(n = 2500, omega = Omega0, alpha = Alpha0, beta = Beta0, R.mat = R0, nu = Inf, valinit = 500)
-Epsi <- as.data.frame(Epsi)
-
+Epsi <- Mgarch.sim(2500, Omega0, Alpha0, Beta0, "diagonal", R.mat = R0, bruit = "normal")
 
 ############ ESTIMATION ############
 
@@ -184,7 +208,7 @@ estim.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
                 list(Omega = Omega, A = A, B = B, minimum = QMLE$minimum, R = R) #SD = SD,, sd.R = var$sd)
             }
                 else {
-                    print("Modele non reconnu")
+                    print("Not a valid model")
                 }
         
         }
