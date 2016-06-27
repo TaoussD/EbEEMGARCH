@@ -86,7 +86,7 @@ Omegainit <- rep(0.1, m)
 Alphainit <- rep(0.5, m)
 Betainit <- rep(0.7, m)
 
-estim.EbEE.Mgarch11(Omegainit,Alphainit,Betainit,Epsi,r=10,model="diagonal")
+estim.EbEE(Omegainit,Alphainit,Betainit,Epsi,r=10,model="diagonal")
 
 ####
 # If we allow a semi-diagonal model
@@ -96,7 +96,7 @@ omegainit <- rep(0.2, m)
 alphainit <- matrix(rep(0.2 / m, m ^ 2), nrow = d)
 betainit <- rep(0.70, m)
 
-estim.EbEE.Mgarch11(omegainit,alphainit,betainit,Epsi,r=10,model="sdiagonal")
+estim.EbEE(omegainit,alphainit,betainit,Epsi,r=10,model="sdiagonal")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
