@@ -9,7 +9,7 @@
 }
 Fonction to simulate data from full diagonal MGARCH(1,1) model
 \usage{
-Mgarch.sim(n, omega, alpha, beta, R, noise, nu = Inf, valinit = 500)
+Mgarch.sim(n, omega, alpha, beta, model, R, noise, nu = Inf, valinit = 500)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
