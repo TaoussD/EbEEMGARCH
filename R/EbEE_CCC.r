@@ -2,7 +2,6 @@ library(compiler)
 library(Rcpp)
 
 ############ FONCTIONS ANNEXES ############
-#Fonction c++ pour accéléer
 
 #racine carree d'un matrice symetrique semi-definie positive
 Sqrt <- function(Sigma) {
@@ -28,26 +27,27 @@ vech0 <- function(A) {
 
 ############ SIMULATION ############
 # simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R.mat
-Mgarch.sim <- function(n, omega, alpha, beta, model,R.mat,bruit, nu = Inf, valinit = 500) {
+GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit = 500) {
     m <- length(omega)
     cst <- 1
-    if (bruit == "normal") 
+    #Generation des bruits
+    if (noise == "normal") 
      {
-        eta <- matrix(rnorm(m * (n + valinit)), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R.mat))
+        eta <- matrix(rnorm(m * (n + valinit)), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R))
     }
     else
     {
         
-        if (bruit == "student") {
+        if (noise == "student") {
             if (nu > 2 & nu != Inf)
                 cst <- sqrt((nu - 2) / nu)
-            eta <- matrix(cst * rt(m * (n + valinit), nu), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R.mat))
+            eta <- matrix(cst * rt(m * (n + valinit), nu), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R))
         }
             else {
                 print("Not a valid noise")
             }
     }
-    eta <- matrix(rnorm(m * (n + valinit)), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R.mat))
+    eta <- matrix(rnorm(m * (n + valinit)), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R))
     eps <- matrix(0, nrow = n + valinit, ncol = m)
     ht <- matrix(0, nrow = n + valinit, ncol = m)
     if (model == "diagonal") {
@@ -72,8 +72,9 @@ Mgarch.sim <- function(n, omega, alpha, beta, model,R.mat,bruit, nu = Inf, valin
     return(as.data.frame(eps[(valinit + 1):(n + valinit),]))
 }
 
-Mgarch.sim <- cmpfun(Mgarch.sim)
+GarchCCC.sim <- cmpfun(GarchCCC.sim)
 
+#Lazy data
 
 m <- 3
 Omega0 <- rep(0.01, m)
@@ -81,7 +82,7 @@ Alpha0 <- rep(0.05, m)
 Beta0 <- rep(0.90, m)
 R0 <- diag(rep(1, m))
 
-Epsi <- Mgarch.sim(2500, Omega0, Alpha0, Beta0, "diagonal", R.mat = R0, bruit = "normal")
+Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0, model="diagonal", R = R0, noise = "normal")
 
 ############ ESTIMATION ############
 
@@ -92,7 +93,7 @@ objf <- function(x, eps, eps2, n, r, tol = sqrt(.Machine$double.eps)) {
     beta <- x[3]
     sigma2 <- rep(0, n)
     sigma2[1] <- var(eps[1:r])
-    sigma2.mod <- objfcpp(eps2, sigma2, omega, alpha, beta, r, n, tol)
+    sigma2.mod <- objfcpp(eps2, sigma2, omega, alpha, beta, r, n, tol) #Appel du c++
     sigma2.mod <- sigma2.mod[(r + 1):n]
     qml <- mean(log(sigma2.mod) + eps[(r + 1):n] ** 2 / sigma2.mod)
     qml
@@ -112,7 +113,7 @@ estim.1equa.Mgarch11 <- function(omega, alpha, beta, eps, r) {
 
     sigma2 <- rep(0, n)
     sigma2[1] <- var(eps[1:r])
-    sigma2 <- objfcpp2(eps2, sigma2, omega, alpha, beta, n)
+    sigma2 <- objfcpp2(eps2, sigma2, omega, alpha, beta, n)   #Appel du c++
 
     eta <- eps[(r + 1):n] / sqrt(sigma2[(r + 1):n])
 
@@ -158,9 +159,9 @@ estimMgarch.sdiag <- function(omega, Alpha, beta, eps0, Ht, r) {
 
 
 
-# estime EbE un MGARCH(1,1)-CCC diagonal 
+#estime EbE un MGARCH(1,1)-CCC diagonal ou semi-diagonal 
 
-estim.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
+estimCCC.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
     if (model == "diagonal") 
         {
         #fast()
