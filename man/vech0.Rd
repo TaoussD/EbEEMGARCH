@@ -41,7 +41,7 @@ vech0(A)
 \seealso{
 \code{\link{EbEEMGARCH}}{  Homepage of the documentation}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 
 }

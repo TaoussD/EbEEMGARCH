@@ -1,15 +1,15 @@
-\name{Mgarch.sim}
-\alias{Mgarch.sim}
+\name{GarchCCC.sim}
+\alias{GarchCCC.sim}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Simulation of a MGARCH(1,1) CCC-diagonal or semi-diagonal
 %%  ~~function to do ... ~~
 }
-\description{
+\description{Fonction to simulate data from MGARCH(1,1) CCC-diagonal or semi-diagonal model
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
-Fonction to simulate data from full diagonal MGARCH(1,1) model
+
 \usage{
-Mgarch.sim(n, omega, alpha, beta, model, R, noise, nu = Inf, valinit = 500)
+GarchCCC.sim(n, omega, alpha, beta, model, R, noise, nu = Inf, valinit = 500)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -50,7 +50,7 @@ dataframe of the observations
 \seealso{
 \code{\link{EbEEMGARCH}}{  Homepage of the documentation}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 
 ####
@@ -63,7 +63,7 @@ Alpha0 <- rep(0.05, m)
 Beta0 <- rep(0.90, m)
 R0 <- diag(rep(1, m))
 
-Epsi <- Mgarch.sim(2500, Omega0, Alpha0, Beta0,"diagonal", R0, "normal")
+Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0,"diagonal", R0, "normal")
 
 ####
 # Sampling a semi-d1iagonal model with student noise
@@ -75,7 +75,7 @@ Alpha0 <- matrix(c(1,0.5,0.5,0.5,1,0.5,0.5,0.5,1),nrow=3)
 Beta0 <- rep(0.90, m)
 R0 <- diag(rep(1, m))
 
-Epsi <- Mgarch.sim(2500, Omega0, Alpha0, Beta0,"sdiagonal", R0, "student",7)
+Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0,"sdiagonal", R0, "student",7)
 
 
 }

@@ -1,14 +1,14 @@
-\name{estim.EbEE}
-\alias{estim.EbEE}
+\name{estimCCC.EbEE}
+\alias{estimCCC.EbEE}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Estimation of multivariate GARCH equation by equation
+\title{Estimation of multivariate GARCH CCC equation by equation
 %%  ~~function to do ... ~~
 }
-\description{
+\description{Estimation of a MGARCH(1,1) CCC-diagonal or semi-diagonal equation by equation.
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-estim.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
+estimCCC.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,7 +24,7 @@ estim.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
   \item{eps}{m*n matrix of the serie to be estimated
 %%     ~~Describe \code{x} here~~
 }
-\item{r}{Burn-in
+\item{r}{.
 %%     ~~Describe \code{x} here~~
 }
 \item{model}{model="diagonal" if MGARCH(1,1) diagonal
@@ -42,7 +42,7 @@ estim.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 \item{Omega}{Estimation of Omega}
-\item{Alpha}{Estimation of Alpha1}
+\item{Alpha}{Estimation of Alpha}
 \item{Beta}{Estimation of Beta}
 \item{R}{Estimation of R, the correlation matrix}
 }
@@ -63,7 +63,7 @@ D. Taouss, C. Francq
 \seealso{
 \code{\link{EbEEMGARCH}}{  Homepage of the documentation}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 ####
 # Sampling a diagonal model
@@ -75,7 +75,7 @@ Alpha0 <- rep(0.05, m)
 Beta0 <- rep(0.90, m)
 R0 <- diag(rep(1, m))
 
-Epsi <- Mgarch.sim(2500, Omega0, Alpha0, Beta0,"diagonal", R0, "normal")
+Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0,"diagonal", R0, "normal")
 
 
 ####
@@ -86,17 +86,17 @@ Omegainit <- rep(0.1, m)
 Alphainit <- rep(0.5, m)
 Betainit <- rep(0.7, m)
 
-estim.EbEE(Omegainit,Alphainit,Betainit,Epsi,r=10,model="diagonal")
+estimCCC.EbEE(Omegainit,Alphainit,Betainit,Epsi,r=10,model="diagonal")
 
 ####
 # If we allow a semi-diagonal model
 ####
 
 omegainit <- rep(0.2, m)
-alphainit <- matrix(rep(0.2 / m, m ^ 2), nrow = d)
+alphainit <- matrix(rep(0.2 / m, m ^ 2), nrow = m)
 betainit <- rep(0.70, m)
 
-estim.EbEE(omegainit,alphainit,betainit,Epsi,r=10,model="sdiagonal")
+estimCCC.EbEE(omegainit,alphainit,betainit,Epsi,r=10,model="sdiagonal")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

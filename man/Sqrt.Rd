@@ -4,15 +4,15 @@
 \title{Square root of a symetric semi-definite positive matrix
 %%  ~~function to do ... ~~
 }
-\description{
+\description{Gives the square root of a symetric semi-definite positive matrix
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-Sqrt(A)
+Sqrt(Sigma)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{A}{symetric semi-definite positive matrix
+  \item{Sigma}{symetric semi-definite positive matrix
 %%     ~~Describe \code{A} here~~
 }
 }
@@ -25,7 +25,7 @@ Sqrt(A)
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-\item
+
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -42,7 +42,7 @@ Sqrt(A)
 \seealso{
 \code{\link{EbEEMGARCH}}{  Homepage of the documentation}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 
 }

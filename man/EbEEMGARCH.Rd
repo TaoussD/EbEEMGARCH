@@ -1,7 +1,7 @@
 \name{EbEEMGARCH}
 \alias{EbEEMGARCH}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Estimation of MGARCH(1,1) models
+\title{Homepage of the documentation
 %%  ~~function to do ... ~~
 }
 \description{This package provides several tools to sample or estimate MGARCH(1,1) models equation by equation
@@ -35,8 +35,8 @@ D. Taouss & C. Francq
 \itemize{
 \item{\code{\link{Sqrt}}{  Square root of a symetric semi-definite positive matrix}}
 \item{\code{\link{vech0}}{  vech0 operator}}
-\item{\code{\link{Mgarch.sim}}{  Simulation of a MGARCH(1,1) CCC-diagonal or semi-diagonal }}
-\item{\code{\link{estim.EbEE}}{  Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal equation by equation}}
+\item{\code{\link{GarchCCC.sim}}{  Simulation of a MGARCH(1,1) CCC-diagonal or semi-diagonal }}
+\item{\code{\link{estimCCC.EbEE}}{  Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal equation by equation}}
 %%  ~~further notes~~
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 }}
