@@ -37,6 +37,7 @@ D. Taouss & C. Francq
 \item{\code{\link{vech0}}{  vech0 operator}}
 \item{\code{\link{GarchCCC.sim}}{  Simulation of a MGARCH(1,1) CCC-diagonal or semi-diagonal }}
 \item{\code{\link{estimCCC.EbEE}}{  Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal equation by equation}}
+\item{\code{\link{GarchDCC.sim}}{  Simulation of a Aielli or Engle MGARCH(1,1) DCC semi-diagonal }}
 %%  ~~further notes~~
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 }}
