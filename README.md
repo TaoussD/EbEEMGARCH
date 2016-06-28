@@ -30,8 +30,8 @@ install.packages("Rcpp")
 
 ## Methods
 
-- estim.EBEE : Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal model equation by equation
-- Mgarch.sim : Simulation of MGARCH(1,1) CCC-diagonal or semi-diagonal 
+- estimCCC.EBEE : Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal model equation by equation
+- GarchCCC.sim : Simulation of MGARCH(1,1) CCC-diagonal or semi-diagonal 
 - vech0 : vech0 operator
 - Sqrt : Square root of a symetric semi-definite positive matrix
 
