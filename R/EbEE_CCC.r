@@ -26,7 +26,8 @@ vech0 <- function(A) {
 }
 
 ############ SIMULATION ############
-# simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R.mat
+# simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R
+
 GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit = 500) {
     m <- length(omega)
     cst <- 1
@@ -74,15 +75,6 @@ GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit
 
 GarchCCC.sim <- cmpfun(GarchCCC.sim)
 
-#Lazy data
-
-#m <- 3
-#Omega0 <- rep(0.01, m)
-#Alpha0 <- rep(0.05, m)
-#Beta0 <- rep(0.90, m)
-#R0 <- diag(rep(1, m))
-
-#Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0, model="diagonal", R = R0, noise = "normal")
 
 ############ ESTIMATION ############
 
