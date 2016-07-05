@@ -30,9 +30,12 @@ install.packages("Rcpp")
 
 ## Methods
 
-- estimCCC.EBEE : Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal model equation by equation
+- estimCCC.EbEE : Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal model equation by equation
+- estimDCC.EbEE : Estimation of the parameters of a Engle or Aielli MGARCH(1,1) DCC equation by equation
 - GarchCCC.sim : Simulation of MGARCH(1,1) CCC-diagonal or semi-diagonal 
 - GarchDCC.sim : Simulation of Aielli or Engle MGARCH(1,1) DCC semi-diagonal
+- MSD.CCC.EbEE : Compute mean and variance of the estimator through Monte Carlo methods for CCC models
+- MSD.DCC.EbEE : Compute mean and variance of the estimator through Monte Carlo methods for DCC models
 - vech0 : vech0 operator
 - Sqrt : Square root of a symetric semi-definite positive matrix
 
