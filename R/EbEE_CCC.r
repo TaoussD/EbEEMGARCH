@@ -31,13 +31,13 @@ GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit
     m <- length(omega)
     cst <- 1
     #Generation des bruits
-    if (noise == "normal") 
+    if (noise == "normal")
      {
         eta <- matrix(rnorm(m * (n + valinit)), ncol = m, nrow = (n + valinit)) %*% t(Sqrt(R))
     }
     else
     {
-        
+
         if (noise == "student") {
             if (nu > 2 & nu != Inf)
                 cst <- sqrt((nu - 2) / nu)
@@ -76,13 +76,13 @@ GarchCCC.sim <- cmpfun(GarchCCC.sim)
 
 #Lazy data
 
-m <- 3
-Omega0 <- rep(0.01, m)
-Alpha0 <- rep(0.05, m)
-Beta0 <- rep(0.90, m)
-R0 <- diag(rep(1, m))
+#m <- 3
+#Omega0 <- rep(0.01, m)
+#Alpha0 <- rep(0.05, m)
+#Beta0 <- rep(0.90, m)
+#R0 <- diag(rep(1, m))
 
-Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0, model="diagonal", R = R0, noise = "normal")
+#Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0, model="diagonal", R = R0, noise = "normal")
 
 ############ ESTIMATION ############
 
@@ -159,12 +159,11 @@ estimMgarch.sdiag <- function(omega, Alpha, beta, eps0, Ht, r) {
 
 
 
-#estime EbE un MGARCH(1,1)-CCC diagonal ou semi-diagonal 
+#estime EbE un MGARCH(1,1)-CCC diagonal ou semi-diagonal
 
 estimCCC.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
-    if (model == "diagonal") 
+    if (model == "diagonal")
         {
-        #fast()
         m <- length(Omega)
         n <- length(eps[, 1])
         Res <- matrix(nrow = (n - r), ncol = m)
@@ -180,10 +179,10 @@ estimCCC.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
                 Res[, j] <- res$eta
             }
         R <- cor(Res)
-        list(Omega=Omega.est, Alpha=Alpha.est, Beta=Beta.est, R=R)
+        list(Omega=Omega.est, A=Alpha.est, B=Beta.est, R=R)
         }
 
-        else 
+        else
             {
 
             if (model == "sdiagonal") {
@@ -211,10 +210,47 @@ estimCCC.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
                 else {
                     print("Not a valid model")
                 }
-        
+
         }
 
 
 }
 
 
+MSD.CCC.EbEE <- function(theta0, init, nobs, iter, type, noise, nu = Inf) {
+    Omega.list <- list()
+    A.list <- list()
+    B.list <- list()
+    R.list <- list()
+
+
+    for (i in 1:iter) {
+        eps <- GarchCCC.sim(nobs, theta0$Omega, theta0$A, theta0$B, theta0$R, nu = nu, model = type, noise = noise)
+        tmp <- estimCCC.EbEE(init$Omega, init$A, init$B, eps, r = 10, model = type)
+        Omega.list[[i]] <- tmp$Omega
+        A.list[[i]] <- tmp$A
+        B.list[[i]] <- tmp$B
+        R.list[[i]] <- tmp$R
+    }
+    Omega.mean <- apply(simplify2array(Omega.list), 1, mean)
+    Omega.sd <- apply(simplify2array(Omega.list), 1, sd)
+    if (type == "sdiagonal") {
+        A.mean <- apply(simplify2array(A.list), 1:2, mean)
+        A.sd <- apply(simplify2array(A.list), 1:2, sd)
+    }
+        else {
+            if (type == "diagonal") {
+                A.mean <- apply(simplify2array(A.list), 1, mean)
+                A.sd <- apply(simplify2array(A.list), 1, sd)
+            } else {
+                print("Not a valid model")
+            }
+        }
+    B.mean <- apply(simplify2array(B.list), 1, mean)
+    B.sd <- apply(simplify2array(B.list), 1, sd)
+    R.mean <- apply(simplify2array(R.list), 1:2, mean)
+    R.sd <- apply(simplify2array(R.list), 1:2, sd)
+
+    return(list(Omega.mean = Omega.mean, Omega.sd = Omega.sd, A.mean = A.mean, A.sd = A.sd, B.mean = B.mean, B.sd = B.sd, R.mean = R.mean, R.sd = R.sd))
+
+}
