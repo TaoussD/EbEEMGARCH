@@ -1,7 +1,7 @@
 Package: EbEEMGARCH
 Type: Package
 Title: Esimating MGARCH(1,1) model equation by equation
-Version: 0.2.0
+Version: 0.3.0
 Author: D. Taouss & C. Francq
 Maintainer: Dimitri Taouss <dimitri.taouss@ensae.fr>
 Description: Various tools for MGARCH models
