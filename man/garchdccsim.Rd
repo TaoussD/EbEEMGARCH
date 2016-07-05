@@ -8,20 +8,22 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-GarchDCC.sim(n, omega, Alpha, beta, aalpha, bbeta, S, nu = Inf, valinit = 500, Aielli = TRUE, noise)
+GarchDCC.sim(n, Omega, A, B, alpha, beta, S, nu = Inf, valinit = 500, model, noise)
 }
 %- maybe also 'usage' for other objects documented here.
-\arguments{
+\arguments{With usual notations of MGARCH(1,1) DCCC
   \item{n}{Number of observation}
-  \item{omega}{Vector Omega}
-  \item{Alpha}{Vector of the diagonal of Alpha}
-  \item{beta}{Vector of the diagonal of Beta}
-  \item{aalpha}{Scalar alpha in Aielli's notation}
-  \item{bbeta}{Scalar beta in Aielli's notation}
+  \item{Omega}{Vector Omega (constant)}
+  \item{A}{Matrix A}
+  \item{B}{Vector of the diagonal of B}
+  \item{alpha}{Scalar alpha in Aielli's notation}
+  \item{beta}{Scalar beta in Aielli's notation}
   \item{S}{Variance of the noise (matrix)}
   \item{nu}{Degrees of freedom of the t-distribution, leave blank if normal-noise}
   \item{valinit}{Burn-in}
-  \item{Aielli}{Aielli or Engle DCC-sample}
+  \item{model}{type="Engle" for estimation as an Engle-DCC
+\cr type="Aielli" for estimation as an Aielli-DCC
+}
   \item{noise}{"normal" or "student"}
 
 %%     ~~Describe \code{x} here~~
@@ -59,22 +61,22 @@ GarchDCC.sim(n, omega, Alpha, beta, aalpha, bbeta, S, nu = Inf, valinit = 500, A
 #Simulation of a Aielli DCC semi-diagonal with student noise
 ###
 
-omega <- c(0.01, 0.01);
-Alpha <- matrix(c(0.03, 0.01, 0.01, 0.03), nrow = 2)
-beta <- c(0.8, 0.8);
+Omega <- c(0.01, 0.01);
+A <- matrix(c(0.03, 0.01, 0.01, 0.03), nrow = 2)
+B <- c(0.8, 0.8);
 S <- matrix(c(1, 0.4, 0.4, 1), nrow = 2)
-aalpha <- 0.01;
-bbeta <- 0.99 - aalpha
-n <- 800
-nu <-7
+alpha <- 0.05;
+beta <- 0.99 - alpha
+n <- 2500
+nu <-14
 
-eps <- GarchDCC.sim(n, omega, Alpha, beta, aalpha, bbeta, S, nu = nu, noise = "student")
+eps <- GarchDCC.sim(n, Omega, A, B, alpha, beta, S, nu = nu, noise = "student",model="Aielli")
 
 ###
 #Simulation of a Engle DCC semi-diagonal with normal noise
 ###
 
-eps <- GarchDCC.sim(n, omega, Alpha, beta, aalpha, bbeta, S, noise = "normal",Aielli=FALSE)
+eps <- GarchDCC.sim(n, Omega, A, B, alpha, beta, S, nu = Inf, noise = "normal",model="Engle")
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 }

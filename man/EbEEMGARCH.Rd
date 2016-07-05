@@ -36,13 +36,17 @@ D. Taouss & C. Francq
 \item{\code{\link{Sqrt}}{  Square root of a symetric semi-definite positive matrix}}
 \item{\code{\link{vech0}}{  vech0 operator}}
 \item{\code{\link{GarchCCC.sim}}{  Simulation of a MGARCH(1,1) CCC-diagonal or semi-diagonal }}
-\item{\code{\link{estimCCC.EbEE}}{  Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal equation by equation}}
+\item{\code{\link{estimCCC.EbEE}}{  Estimation of a MGARCH(1,1) CCC-diagonal or semi-diagonal equation by equation}}
+\item{\code{\link{MSD.CCC.EbEE}}{  Compute mean and standard deviation of the estimator for CCC models}}
 \item{\code{\link{GarchDCC.sim}}{  Simulation of a Aielli or Engle MGARCH(1,1) DCC semi-diagonal }}
+\item{\code{\link{estimDCC.EbEE}}{  Estimation of a Aielli or Engle MGARCH(1,1) DCC semi-diagonal equation by equation }}
+\item{\code{\link{MSD.DCC.EbEE}}{  Compute mean and standard deviation of the estimator for DCC models}}
+}}
 %%  ~~further notes~~
 %% ~Make other sections like Warning with \section{Warning }{....} ~
-}}
+
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+%% ~~objects to See Also as \code\link{help}}, ~~~
 Source of the package available at \url{https://github.com/TaoussD/EbEEMGARCH}
 }
 

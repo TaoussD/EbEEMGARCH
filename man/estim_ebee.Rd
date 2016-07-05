@@ -24,7 +24,7 @@ estimCCC.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
   \item{eps}{m*n matrix of the serie to be estimated
 %%     ~~Describe \code{x} here~~
 }
-\item{r}{.
+\item{r}{Number of observations used for the initialisation
 %%     ~~Describe \code{x} here~~
 }
 \item{model}{model="diagonal" if MGARCH(1,1) diagonal
