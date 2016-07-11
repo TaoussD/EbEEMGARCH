@@ -78,9 +78,10 @@ omegainit <- rep(0.02, m)
 Ainit <- matrix(rep(0.03, m ^ 2), ncol = m)
 Binit <- rep(0.7, m)
 Sinit<-diag(rep(1,m))
-aalphainit <- 0.05
-bbetainit <- 0.90 - aalphainit
+alphainit <- 0.04
+betainit <- 0.90 - alphainit
 
+res <- estimDCC.EbEE(omegainit,Ainit,Binit,Sinit,alphainit,betainit,eps$sim,type="Aielli")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -45,6 +45,7 @@ estimCCC.EbEE(Omega, Alpha, Beta, eps, r = 10, model)
 \item{Alpha}{Estimation of Alpha}
 \item{Beta}{Estimation of Beta}
 \item{R}{Estimation of R, the correlation matrix}
+\item{Residuals}{Estimation of the residuals}
 }
 \references{
 %% ~put references to the literature/web site here ~
