@@ -1,6 +1,5 @@
 library(compiler)
 
-#Inverse de vech0
 
 inv.vech0 <- function(rho) {
     m <- length(rho)
@@ -82,9 +81,22 @@ GarchDCC.sim <- function(n, Omega, A, B, alpha, beta, S, nu = Inf, valinit = 500
 GarchDCC.sim <- cmpfun(GarchDCC.sim)
 
 
+#Lazy data
+m<-2
+omega <- c(1, 1);
+Alpha <- matrix(rep(0.025, m ^ 2), ncol = m)
+beta <- c(0.8, 0.8);
+S <- matrix(c(1, 0.3, 0.3, 1), nrow = 2)
+aalpha <- 0.05;
+bbeta <- 0.99 - aalpha
+n <- 2500
+nu <-7
+eps <- GarchDCC.sim(n, omega, Alpha, beta, aalpha, bbeta, S, nu = nu, model="Aielli",noise = "student")
+
 ############ ESTIMATION ############
 
-# estimeur de second etape d'un DCC
+
+# estimeur de second ?tape d'un DCC
 
 objf.Rt.DCC <- function(x, eta.star, m, n, r, tol = sqrt(.Machine$double.eps),type) {
 tol = sqrt(.Machine$double.eps)
@@ -133,6 +145,9 @@ if (!all(is.finite(x)) | (aalpha + bbeta) > 1 - tol) {
 
 objf.Rt.DCC <- cmpfun(objf.Rt.DCC)
 
+#
+
+
 estim.Rt.DCC <- function(S, aalpha, bbeta, eta.star, r = 10,type) {
     n <- length(eta.star[, 1])
     m <- length(eta.star[1,])
@@ -149,6 +164,8 @@ estim.Rt.DCC <- function(S, aalpha, bbeta, eta.star, r = 10,type) {
 
 estim.Rt.DCC <- cmpfun(estim.Rt.DCC)
 
+# estimeur deux ?tapes d'un DCC (EbEE en premi?re ?tape)
+# omega<-omegainit;Alpha<-Alphainit;beta<-betainit;S<-Sinit;aalpha<-aalphainit;bbeta<-bbetainit
 
 estimDCC.EbEE <- function(Omega, A, B, S, alpha, beta, eps, r = 10, type) {
     m <- length(omega)
@@ -161,11 +178,12 @@ estimDCC.EbEE <- function(Omega, A, B, S, alpha, beta, eps, r = 10, type) {
     Alpha.est <- EbEE$A
     Beta.est <- EbEE$B
     Res <- EbEE$R
+    Residuals <- EbEE$Residuals
 
     #2nd step
     valinit <- c(vech0(cor(Res)), aalpha, bbeta)
     n <- nrow(Res)
-    step <- estim.Rt.DCC(S, aalpha, bbeta, eps, r = 10,type=type)
+    step <- estim.Rt.DCC(S, aalpha, bbeta, Residuals, r = 10,type=type)
     S.est <- step$S
     aalpha.est <- step$alpha
     bbeta.est <- step$beta
@@ -176,6 +194,18 @@ estimDCC.EbEE <- function(Omega, A, B, S, alpha, beta, eps, r = 10, type) {
 }
 
 estimDCC.EbEE <- cmpfun(estimDCC.EbEE)
+
+#m<-2
+#Omegainit <- rep(0.02, m)
+#Ainit <- matrix(rep(0.03, m ^ 2), ncol = m)
+#Binit <- rep(0.7, m)
+#R0<-diag(rep(1,m))
+#alphainit <- 0.05
+#betainit <- 0.90 - alphainit
+
+
+#res <- estimDCC.EbEE(megainit, Ainit, betainit, R0, alphainit, betainit, eps$sim, r = 10, type="Aielli")
+
 
 
 

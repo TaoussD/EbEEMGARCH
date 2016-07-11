@@ -26,8 +26,7 @@ vech0 <- function(A) {
 }
 
 ############ SIMULATION ############
-# simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R
-
+# simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R.mat
 GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit = 500) {
     m <- length(omega)
     cst <- 1
@@ -75,6 +74,15 @@ GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit
 
 GarchCCC.sim <- cmpfun(GarchCCC.sim)
 
+#Lazy data
+
+#m <- 3
+#Omega0 <- rep(0.01, m)
+#Alpha0 <- rep(0.05, m)
+#Beta0 <- rep(0.90, m)
+#R0 <- diag(rep(1, m))
+
+#Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0, model="diagonal", R = R0, noise = "normal")
 
 ############ ESTIMATION ############
 
@@ -171,7 +179,7 @@ estimCCC.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
                 Res[, j] <- res$eta
             }
         R <- cor(Res)
-        list(Omega=Omega.est, A=Alpha.est, B=Beta.est, R=R)
+        list(Omega=Omega.est, A=Alpha.est, B=Beta.est, R=R,Residuals=Res)
         }
 
         else
@@ -197,7 +205,7 @@ estimCCC.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
                 }
                 R <- cor(Res)
                 #        var <- Mgarch.var(Omega, A, B, mat.rend, r)
-                list(Omega = Omega, A = A, B = B, minimum = QMLE$minimum, R = R) #SD = SD,, sd.R = var$sd)
+                list(Omega = Omega, A = A, B = B, minimum = QMLE$minimum, R = R,Residuals=Res) #SD = SD,, sd.R = var$sd)
             }
                 else {
                     print("Not a valid model")
