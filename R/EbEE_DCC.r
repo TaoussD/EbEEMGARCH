@@ -182,31 +182,38 @@ estimDCC.EbEE <- function(Omega, A, B, S, alpha, beta, eps, r = 10, type) {
 
     #2nd step
     valinit <- c(vech0(cor(Res)), aalpha, bbeta)
-    n <- nrow(Res)
+    n <- nrow(Residuals)
     step <- estim.Rt.DCC(S, aalpha, bbeta, Residuals, r = 10,type=type)
     S.est <- step$S
     aalpha.est <- step$alpha
     bbeta.est <- step$beta
 
+    #3rd step
+    omega <- 1-(aalpha.est+bbeta.est)
+    Qdiag <- matrix(nrow = n, ncol = m)
+    Sstar <- array(dim = c(n, m, m))
+    Qdiag[1,] <- 1
+    demi.Sstar <- sqrt(Qdiag[1,]) * Residuals[1,]
+    Sstar[1,,] <- demi.Sstar %*% t(demi.Sstar)
+
+    for (i in 2:n) {
+        Qdiag[i,] <- omega + (aalpha.est * (Residuals[i - 1,] ^ 2) + bbeta.est) * Qdiag[i - 1,]
+        demi.Sstar <- sqrt(Qdiag[i,]) * Residuals[i,]
+        Sstar[i,,] <- demi.Sstar %*% t(demi.Sstar)
+    }
+
+    S.est <- matrix(0, nrow = m, ncol = m)
+    for (i in (r + 1):n) {
+        S.est <- S.est + Sstar[i,,] / n
+    }
+    S.star.moinsdemi <- diag(1 / sqrt(diag(S.est)))
+    S.est <- S.star.moinsdemi %*% S.est %*% S.star.moinsdemi
 
     return(list(Omega=omega.est, A=Alpha.est, B=Beta.est, S=S.est, alpha=aalpha.est, beta=bbeta.est))
 
 }
 
 estimDCC.EbEE <- cmpfun(estimDCC.EbEE)
-
-#m<-2
-#Omegainit <- rep(0.02, m)
-#Ainit <- matrix(rep(0.03, m ^ 2), ncol = m)
-#Binit <- rep(0.7, m)
-#R0<-diag(rep(1,m))
-#alphainit <- 0.05
-#betainit <- 0.90 - alphainit
-
-
-#res <- estimDCC.EbEE(megainit, Ainit, betainit, R0, alphainit, betainit, eps$sim, r = 10, type="Aielli")
-
-
 
 
 MSD.DCC.EbEE <- function(theta0, init, nobs, iter, type, noise, nu=Inf) {
