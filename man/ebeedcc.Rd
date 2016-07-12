@@ -4,7 +4,7 @@
 \title{Estimation of DCC models, equation by equation
 %%  ~~function to do ... ~~
 }
-\description{2 step estimation of DCC models equation by equation
+\description{3 steps estimation of DCC models equation by equation
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
@@ -31,9 +31,10 @@ estimDCC.EbEE(Omega, A, B, S, alpha, beta, eps, r = 10,type)
 \item{Omega}{Estimation parameter for Omega}
 \item{A}{Estimation parameter for A (first step)}
 \item{B}{Estimation parameter for B (first step)}
-\item{S}{Estimation parameter for the correlation matrix (second step)}
+
 \item{alpha}{Estimation parameter for alpha (second step)}
-\item{beta}{Estimation parameter for beta (second step)}}
+\item{beta}{Estimation parameter for beta (second step)}
+\item{S}{Estimation parameter for the correlation matrix (third step)}}
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
