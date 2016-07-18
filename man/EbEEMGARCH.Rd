@@ -41,6 +41,8 @@ D. Taouss & C. Francq
 \item{\code{\link{GarchDCC.sim}}{  Simulation of a Aielli or Engle MGARCH(1,1) DCC semi-diagonal }}
 \item{\code{\link{estimDCC.EbEE}}{  Estimation of a Aielli or Engle MGARCH(1,1) DCC semi-diagonal equation by equation }}
 \item{\code{\link{MSD.DCC.EbEE}}{  Compute mean and standard deviation of the estimator for DCC models}}
+
+\item{\code{\link{residuals_DCC}}{  Compute residuals for DCC models}}
 }}
 %%  ~~further notes~~
 %% ~Make other sections like Warning with \section{Warning }{....} ~
