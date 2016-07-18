@@ -1,5 +1,5 @@
 # EbEEMGARCH
-*Package under development*
+*Package under development* :bar_chart:
 
 R package to estimate MGARCH(1,1) model equation by equation
 
