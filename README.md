@@ -36,6 +36,7 @@ install.packages("Rcpp")
 - GarchDCC.sim : Simulation of Aielli or Engle MGARCH(1,1) DCC semi-diagonal
 - MSD.CCC.EbEE : Compute mean and variance of the estimator through Monte Carlo methods for CCC models
 - MSD.DCC.EbEE : Compute mean and variance of the estimator through Monte Carlo methods for DCC models
+- residuals_DCC : Compute residuals for Engle & Aielli DCC models
 - vech0 : vech0 operator
 - Sqrt : Square root of a symetric semi-definite positive matrix
 
