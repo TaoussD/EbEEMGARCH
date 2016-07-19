@@ -1,10 +1,10 @@
 Package: EbEEMGARCH
 Type: Package
-Title: Esimating MGARCH(1,1) model equation by equation
+Title: Esimating MGARCH(1,1) model equation by equation 
 Version: 0.3.0
 Author: D. Taouss & C. Francq
 Maintainer: Dimitri Taouss <dimitri.taouss@ensae.fr>
-Description: Various tools for MGARCH models
+Description: Various tools to estimate MGARCH models such as CCC-diagonal CCC-semi diagonal Engle's DCC & Aielli's DCC
 License: What license is it under?
 LazyData: TRUE
 Imports: 
