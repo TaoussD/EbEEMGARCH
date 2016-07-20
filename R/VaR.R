@@ -57,3 +57,18 @@ residuals_DCC <-function(Omega,A,B,alpha,beta,S,eps,r=10,type)
 }
 
 residuals_DCC <- cmpfun(residuals_DCC)
+
+VaR.Spherical <- function(n, Omega, A, B, alpha, beta, S, eps, type, level, weights) {
+  nobs<-nrow(eps)
+  residu <- residuals_DCC(Omega, A, B, alpha, beta, S, eps, type = "Aielli")
+  VaR <- c()
+  quantil <- quantile(abs(residu$eta[1:n]), 1 - 2 * level)
+  for (t in 1:nobs) {
+    VaR <- c(VaR, - quantil * sqrt(sum((weights[t,] %*% Sqrt(residu$Ht[t,,]) ^ 2))))
+  }
+  return(VaR)
+}
+
+VaR.Spherical <- cmpfun(VaR.Spherical)
+
+
