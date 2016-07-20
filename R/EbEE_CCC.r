@@ -74,15 +74,7 @@ GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit
 
 GarchCCC.sim <- cmpfun(GarchCCC.sim)
 
-#Lazy data
 
-#m <- 3
-#Omega0 <- rep(0.01, m)
-#Alpha0 <- rep(0.05, m)
-#Beta0 <- rep(0.90, m)
-#R0 <- diag(rep(1, m))
-
-#Epsi <- GarchCCC.sim(2500, Omega0, Alpha0, Beta0, model="diagonal", R = R0, noise = "normal")
 
 ############ ESTIMATION ############
 
@@ -145,8 +137,6 @@ estimMgarch.sdiag <- function(omega, Alpha, beta, eps0, Ht, r) {
     omega <- res$par[1]
     Alpha <- res$par[2:(d + 1)]
     beta <- res$par[d + 2]
-    #var <- Pgarch.var(omega, Alpha, beta, eps0, Ht, r)
-    #sd <- var$sd
     sigma2 <- rep(0,n)
     for (t in 2:n) {
         sigma2[t] <- omega + as.numeric(t(Alpha) %*% Ht[t - 1,]) + beta * sigma2[t - 1]

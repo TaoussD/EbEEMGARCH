@@ -1,4 +1,8 @@
 library(compiler)
+
+####
+#Inline function
+####
 InvSqrt <- function(Sigma, tol = sqrt(.Machine$double.eps)) {
   n <- nrow(Sigma)
   sp <- eigen(Sigma)
@@ -7,7 +11,9 @@ InvSqrt <- function(Sigma, tol = sqrt(.Machine$double.eps)) {
   return(res)
 }
 
-
+#####
+# Compute Ht, Qt, Rt (DCC model) & eta the residuals
+#####
 residuals_DCC <-function(Omega,A,B,alpha,beta,S,eps,r=10,type)
 {
   n<-nrow(eps)
@@ -53,10 +59,15 @@ residuals_DCC <-function(Omega,A,B,alpha,beta,S,eps,r=10,type)
   }
 
 
-  return(list(Ht=Ht,Rt=Rt,eta=eta))
+  return(list(Ht=Ht,Rt=Rt,Qt=Qt,eta=eta))
 }
 
 residuals_DCC <- cmpfun(residuals_DCC)
+
+
+#####
+# Compute CvaR for portfolio where yields follow MGARCH(1,1) DCC & residuals have a spherical distribution
+#####
 
 VaR.Spherical <- function(n, Omega, A, B, alpha, beta, S, eps, type, level, weights) {
   nobs<-nrow(eps)

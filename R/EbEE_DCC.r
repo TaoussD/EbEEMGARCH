@@ -1,5 +1,8 @@
 library(compiler)
 
+#####
+#Inline function
+#####
 
 inv.vech0 <- function(rho) {
     m <- length(rho)
@@ -81,22 +84,10 @@ GarchDCC.sim <- function(n, Omega, A, B, alpha, beta, S, nu = Inf, valinit = 500
 GarchDCC.sim <- cmpfun(GarchDCC.sim)
 
 
-#Lazy data
-m<-2
-omega <- c(1, 1);
-Alpha <- matrix(rep(0.025, m ^ 2), ncol = m)
-beta <- c(0.8, 0.8);
-S <- matrix(c(1, 0.3, 0.3, 1), nrow = 2)
-aalpha <- 0.05;
-bbeta <- 0.99 - aalpha
-n <- 2500
-nu <-7
-eps <- GarchDCC.sim(n, omega, Alpha, beta, aalpha, bbeta, S, nu = nu, model="Aielli",noise = "student")
-
 ############ ESTIMATION ############
 
 
-# estimeur de second ?tape d'un DCC
+# estimeur de second etape d'un DCC
 
 objf.Rt.DCC <- function(x, eta.star, m, n, r, tol = sqrt(.Machine$double.eps),type) {
 tol = sqrt(.Machine$double.eps)
@@ -164,8 +155,6 @@ estim.Rt.DCC <- function(S, aalpha, bbeta, eta.star, r = 10,type) {
 
 estim.Rt.DCC <- cmpfun(estim.Rt.DCC)
 
-# estimeur deux ?tapes d'un DCC (EbEE en premi?re ?tape)
-# omega<-omegainit;Alpha<-Alphainit;beta<-betainit;S<-Sinit;aalpha<-aalphainit;bbeta<-bbetainit
 
 estimDCC.EbEE <- function(Omega, A, B, S, alpha, beta, eps, r = 10, type) {
     m <- length(omega)
