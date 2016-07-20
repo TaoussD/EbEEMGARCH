@@ -1,26 +1,33 @@
+library(compiler)
 InvSqrt <- function(Sigma, tol = sqrt(.Machine$double.eps)) {
   n <- nrow(Sigma)
   sp <- eigen(Sigma)
-  sp$vector %*% sqrt(diag(1 / pmax(abs(sp$values), tol))) %*% t(sp$vector)
+
+  res<-sp$vector %*% sqrt(diag(1 / pmax(abs(sp$values), tol))) %*% t(sp$vector)
+  return(res)
 }
 
 
 residuals_DCC <-function(Omega,A,B,alpha,beta,S,eps,r=10,type)
 {
+  n<-nrow(eps)
+  m<-ncol(eps)
+  ###########
   tol <- sqrt(.Machine$double.eps)
-  Qt <- array(dim = c(n, m, m))
-  Ht <- Qt
-  Qt[1,,] <- S
-  Qt.star <- diag(sqrt(diag(Qt[1,,])))
-  Qt.star.inv <- diag(sqrt(1 / pmax(diag(Qt[1,,]), tol)))
-  Rt <- Qt
-  Rt[1,,] <- Qt.star.inv %*% Qt[1,,] %*% Qt.star.inv
+  Qt<-array(dim=c(n,m,m))
+  Ht<-Qt
+  Qt[1,,]<-S
+  Qt.star<-diag(sqrt(diag(Qt[1,,])))
+  Qt.star.inv<-diag(sqrt(1/pmax(diag(Qt[1,,]),tol)))
+  Rt<-Qt
+  Rt[1,,]<-Qt.star.inv%*%Qt[1,,]%*%Qt.star.inv
 
 
-  eta.star <- matrix(0, nrow = n, ncol = m)
-  ht <- matrix(0, nrow = n, ncol = m)
-  ht[1,] <- colMeans(eps[1:r,] ^ 2)
-  Ht[1,,] <- diag(sqrt(ht[1,])) %*% Rt[1,,] %*% diag(sqrt(ht[1,]))
+  eta.star<-matrix(0,nrow=n,ncol=m)
+  ht<-matrix(0,nrow=n,ncol=m)
+  ht[1,]<-colMeans(eps[1:r,]^2)
+  Ht[1,,]<-diag(sqrt(ht[1,]))%*%Rt[1,,]%*%diag(sqrt(ht[1,]))
+
 
   for (t in 2:n) {
     ht[t,] <- Omega + as.vector(A %*% (eps[t - 1,] ^ 2)) + B * ht[t - 1,]
@@ -40,9 +47,9 @@ residuals_DCC <-function(Omega,A,B,alpha,beta,S,eps,r=10,type)
     Rt[t,,] <- Qt.star.inv %*% Qt[t,,] %*% Qt.star.inv
     Ht[t,,] <- diag(sqrt(ht[t,])) %*% Rt[t,,] %*% diag(sqrt(ht[t,]))
   }
-  eta <- matrix(0, nrow = n, ncol = 2)
+  eta <- matrix(0, nrow = n, ncol = m)
   for (t in 1:n) {
-    eta[t,] <- InvSqrt(as.matrix(var$Ht[t,,])) %*% Rend$sim[t,]
+    eta[t,] <- InvSqrt(as.matrix(Ht[t,,])) %*% eps[t,]
   }
 
 
