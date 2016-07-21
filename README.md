@@ -1,7 +1,7 @@
 # EbEEMGARCH
 *Package under development* :bar_chart:
 
-R package to estimate MGARCH(1,1) model equation by equation
+R package to estimate MGARCH(1,1) models equation by equation
 
 This package provides various tools to simulate and estimate MGARCH(1,1) models. After, I will include tools to estimate VaR of financial series who follow MGARCH models.
 
