@@ -3,7 +3,7 @@
 
 R package to estimate MGARCH(1,1) models equation by equation
 
-This package provides various tools to simulate and estimate MGARCH(1,1) models. After, I will include tools to estimate VaR of financial series who follow MGARCH models.
+This package provides various tools to simulate and estimate MGARCH(1,1) models. After, I will include tools to estimate CVaR of financial series who follow MGARCH models.
 
 
 This package is based on these papers :
