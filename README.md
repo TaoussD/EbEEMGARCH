@@ -32,11 +32,11 @@ install.packages("Rcpp")
 
 - estimCCC.EbEE : Estimation of the parameters of a MGARCH(1,1) CCC-diagonal or semi-diagonal model equation by equation
 - estimDCC.EbEE : Estimation of the parameters of a Engle or Aielli MGARCH(1,1) DCC equation by equation
+- residuals_DCC : Compute residuals, Ht and Rt for Engle & Aielli DCC models (usual notations)
 - GarchCCC.sim : Simulation of MGARCH(1,1) CCC-diagonal or semi-diagonal 
 - GarchDCC.sim : Simulation of Aielli or Engle MGARCH(1,1) DCC semi-diagonal
 - MSD.CCC.EbEE : Compute mean and variance of the estimator through Monte Carlo methods for CCC models
 - MSD.DCC.EbEE : Compute mean and variance of the estimator through Monte Carlo methods for DCC models
-- residuals_DCC : Compute residuals, Ht and Rt for Engle & Aielli DCC models (usual notations)
 - VaR.Spherical : Compute CVaR of portfolios where yields follow a MGARCH(1,1) DCC and residuals have a spherical distribution
 - VaR.FHS : Compute CVaR of portfolios where yields follow a MGARCH(1,1) DCC using FHS method
 - vech0 : vech0 operator
