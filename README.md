@@ -38,6 +38,7 @@ install.packages("Rcpp")
 - MSD.DCC.EbEE : Compute mean and variance of the estimator through Monte Carlo methods for DCC models
 - residuals_DCC : Compute residuals for Engle & Aielli DCC models
 - VaR.Spherical : Compute CVaR of portfolios where yields follow a MGARCH(1,1) DCC and residuals have a spherical distribution
+- VaR.FHS : ompute CVaR of portfolios where yields follow a MGARCH(1,1) DCC using FHS method
 - vech0 : vech0 operator
 - Sqrt : Square root of a symetric semi-definite positive matrix
 
