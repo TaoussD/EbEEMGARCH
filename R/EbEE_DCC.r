@@ -1,25 +1,5 @@
 library(compiler)
 
-#####
-#Inline function
-#####
-
-inv.vech0 <- function(rho) {
-    m <- length(rho)
-    d <- (1 + sqrt(1 + 8 * m)) / 2
-    A <- diag(d)
-    ind <- 0
-    for (j in 1:(d - 1)) {
-        for (i in (j + 1):d) {
-            ind <- ind + 1
-            A[i, j] <- rho[ind]
-            A[j, i] <- rho[ind]
-        }
-    }
-    A
-}
-
-
 ############ SIMULATION ############
 
 # Simulation d'un GARCH(1,1) DCC, beta diagonal de Aielli ou de Engle, bruit student ou normal
@@ -157,7 +137,7 @@ estim.Rt.DCC <- cmpfun(estim.Rt.DCC)
 
 
 estimDCC.EbEE <- function(Omega, A, B, S, alpha, beta, eps, r = 10, type) {
-    m <- length(omega)
+    m <- length(Omega)
     n <- length(eps[, 1])
     eps2 <- eps ^ 2
 
@@ -170,9 +150,9 @@ estimDCC.EbEE <- function(Omega, A, B, S, alpha, beta, eps, r = 10, type) {
     Residuals <- EbEE$Residuals
 
     #2nd step
-    valinit <- c(vech0(cor(Res)), aalpha, bbeta)
+    valinit <- c(vech0(cor(Res)), alpha, beta)
     n <- nrow(Residuals)
-    step <- estim.Rt.DCC(S, aalpha, bbeta, Residuals, r = 10,type=type)
+    step <- estim.Rt.DCC(S, alpha, beta, Residuals, r = 10,type=type)
     S.est <- step$S
     aalpha.est <- step$alpha
     bbeta.est <- step$beta

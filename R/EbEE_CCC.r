@@ -1,30 +1,6 @@
 library(compiler)
 library(Rcpp)
 
-############ FONCTIONS ANNEXES ############
-
-#racine carree d'un matrice symetrique semi-definie positive
-Sqrt <- function(Sigma) {
-    n <- nrow(Sigma)
-    sp <- eigen(Sigma)
-    sp$vector %*% sqrt(diag(sp$values))
-}
-Sqrt <- cmpfun(Sqrt)
-
-#vech0
-vech0 <- function(A) {
-    d <- nrow(A)
-    res <- rep(0, (d * (d - 1) / 2))
-    ind <- 0
-    for (j in 1:(d - 1)) {
-        for (i in (j + 1):d) {
-            ind <- ind + 1
-            res[ind] <- A[i, j]
-        }
-    }
-    res
-}
-
 ############ SIMULATION ############
 # simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R.mat
 GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit = 500) {

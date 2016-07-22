@@ -1,15 +1,5 @@
 library(compiler)
 
-####
-#Inline function
-####
-InvSqrt <- function(Sigma, tol = sqrt(.Machine$double.eps)) {
-  n <- nrow(Sigma)
-  sp <- eigen(Sigma)
-
-  res<-sp$vector %*% sqrt(diag(1 / pmax(abs(sp$values), tol))) %*% t(sp$vector)
-  return(res)
-}
 
 #####
 # Compute Ht, Qt, Rt (DCC model) & eta the residuals
@@ -81,5 +71,21 @@ VaR.Spherical <- function(n, Omega, A, B, alpha, beta, S, eps, type, level, weig
 }
 
 VaR.Spherical <- cmpfun(VaR.Spherical)
+
+VaR.FHS <- function(n, Omega, A, B, alpha, beta, S, eps, type, level, weights) {
+  nobs <- nrow(eps)
+  residu <- residuals_DCC(Omega, A, B, alpha, beta, S, eps, type = type)
+  VaR <- c()
+  for (t in 1:nobs) {
+    Sigma<-residu$Ht[t,,]
+    Sigma <- Sqrt(Sigma)
+    VaR <- c(VaR,as.numeric(quantile(as.vector(t(weights[t,]) %*% Sigma %*% t(residu$eta[1:n,])), level)))
+
+  }
+  return(VaR)
+}
+
+VaR.FHS <- cmpfun(VaR.FHS)
+
 
 
