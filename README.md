@@ -40,7 +40,9 @@ install.packages("Rcpp")
 - VaR.Spherical : Compute CVaR of portfolios where yields follow a MGARCH(1,1) DCC and residuals have a spherical distribution
 - VaR.FHS : ompute CVaR of portfolios where yields follow a MGARCH(1,1) DCC using FHS method
 - vech0 : vech0 operator
+- inv.vech0 : Inverse of vech0 operator
 - Sqrt : Square root of a symetric semi-definite positive matrix
+- InvSqrt : Generalized inverse of a square root of a symetric semi-definite positive matrix
 
 Homepage of the documentation available in R with
 
