@@ -29,7 +29,7 @@ VaR.Spherical(n, Omega, A, B, alpha, beta, S, eps, type, level, weights)
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{VaR : vector with the estimated CVaR
+\value{CVaR : vector with the estimated CVaR
 }
 \references{C. Francq & J.M. Zakoian, Joint inference on market and estimation risks in dynamic portfolios
 %% ~put references to the literature/web site here ~
@@ -78,7 +78,6 @@ for (t in 1:n) {
 #####
 
 EbEE<-estimDCC.EbEE(Omega,A,B,S,alpha,beta,yield$sim,type="Aielli")
-res <- residuals_DCC(EbEE$Omega, EbEE$A, EbEE$B, EbEE$alpha, EbEE$beta, EbEE$S, yield$sim, type="Aielli")
 
 VaR <- VaR.Spherical(700, EbEE$Omega, EbEE$A, EbEE$B, EbEE$alpha, EbEE$beta, EbEE$S, yield$sim, type="Aielli", level=0.01, weights=weights)
 

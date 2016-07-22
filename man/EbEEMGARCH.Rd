@@ -33,8 +33,7 @@ D. Taouss & C. Francq
 }
 \note{Functions available in the package
 \itemize{
-\item{\code{\link{Sqrt}}{  Square root of a symetric semi-definite positive matrix}}
-\item{\code{\link{vech0}}{  vech0 operator}}
+
 \item{\code{\link{GarchCCC.sim}}{  Simulation of a MGARCH(1,1) CCC-diagonal or semi-diagonal }}
 \item{\code{\link{estimCCC.EbEE}}{  Estimation of a MGARCH(1,1) CCC-diagonal or semi-diagonal equation by equation}}
 \item{\code{\link{MSD.CCC.EbEE}}{  Compute mean and standard deviation of the estimator for CCC models}}
@@ -43,6 +42,12 @@ D. Taouss & C. Francq
 \item{\code{\link{MSD.DCC.EbEE}}{  Compute mean and standard deviation of the estimator for DCC models}}
 
 \item{\code{\link{residuals_DCC}}{  Compute residuals for DCC models}}
+\item{\code{\link{VaR.Spherical}}{  Compute  CVaR of a portfolio where yields follow a MGARCH(1,1) DCC model, for a spherical distribution of the residuals}}
+\item{\code{\link{VaR.FHS}}{  Compute  CVaR of a portfolio where yields follow a MGARCH(1,1) DCC model using FHS method}}
+\item{\code{\link{Sqrt}}{  Square root of a symetric semi-definite positive matrix}}
+\item{\code{\link{InvSqrt}}{  Inverse of a square root of a symetric semi-definite positive matrix}}
+\item{\code{\link{vech0}}{  vech0 operator}}
+\item{\code{\link{inv.vech0}}{  Inverse of vech0 operator}}
 }}
 %%  ~~further notes~~
 %% ~Make other sections like Warning with \section{Warning }{....} ~

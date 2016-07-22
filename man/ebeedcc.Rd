@@ -74,15 +74,14 @@ nu <-7
 eps <- GarchDCC.sim(n, Omega, A, B, alpha, beta, S, nu = nu, model="Aielli",noise = "student")
 
 #Estimating parameters
-m<-2
-omegainit <- rep(0.02, m)
+Omegainit <- rep(0.02, m)
 Ainit <- matrix(rep(0.03, m ^ 2), ncol = m)
 Binit <- rep(0.7, m)
 Sinit<-diag(rep(1,m))
 alphainit <- 0.04
-betainit <- 0.90 - alphainit
+betainit <- 0.97 - alphainit
 
-res <- estimDCC.EbEE(omegainit,Ainit,Binit,Sinit,alphainit,betainit,eps$sim,type="Aielli")
+res <- estimDCC.EbEE(Omegainit, Ainit, Binit, Sinit, alphainit, betainit, eps$sim, type="Aielli")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
