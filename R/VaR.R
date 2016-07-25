@@ -49,6 +49,7 @@ residuals_DCC <-function(Omega,A,B,alpha,beta,S,eps,r=10,type)
   }
 
 
+
   return(list(Ht=Ht,Rt=Rt,Qt=Qt,eta=eta))
 }
 
@@ -86,6 +87,27 @@ VaR.FHS <- function(n, Omega, A, B, alpha, beta, S, eps, type, level, weights) {
 }
 
 VaR.FHS <- cmpfun(VaR.FHS)
+
+estim.Markowitz <- function(n, Omega, A, B, alpha, beta, S, type, level, yield) {
+  residu<-residuals_DCC(Omega,A,B,alpha,beta,S,yield,type=type)
+  quantil <- quantile(abs(residu$eta[1:n]), 1 - 2 * level)
+  m<-ncol(yield)
+  e <- rep(1, m)
+  nobs <- nrow(yield)
+  a <- matrix(0,ncol=m,nrow=nobs)
+  VaR <- rep(0,nobs)
+  for (t in 1:nobs) {
+    H <- residu$Ht[t,,]
+    invH <- solve(H)
+    denominateur <- drop(t(e) %*% invH %*% e)
+    a[t,] <- invH %*% e / denominateur
+    VaR[t] <- -quantil/sqrt(denominateur)
+
+  }
+  return(list(VaR=VaR,weights=a))
+}
+
+estim.Markowitz <- cmpfun(estim.Markowitz)
 
 
 
