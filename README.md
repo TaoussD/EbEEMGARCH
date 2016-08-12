@@ -1,5 +1,4 @@
 # EbEEMGARCH
-*Package under development* :bar_chart:
 
 R package to estimate MGARCH(1,1) models equation by equation
 
@@ -26,7 +25,7 @@ devtools and Rcpp can be easily installed in a R console (available on CRAN)
 install.packages("devtools")
 install.packages("Rcpp")
 ```
-
+If you still have troubles, please update R and install the associated Rtools.
 
 ## Methods
 
