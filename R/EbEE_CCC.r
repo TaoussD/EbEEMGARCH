@@ -2,7 +2,8 @@ library(compiler)
 library(Rcpp)
 
 ############ SIMULATION ############
-# simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R.mat
+# simule un GARCH(1,1)-CCC diagonal avec bruit Student de variance R
+
 GarchCCC.sim <- function(n, omega, alpha, beta, model,R,noise, nu = Inf, valinit = 500) {
     m <- length(omega)
     cst <- 1
@@ -159,19 +160,19 @@ estimCCC.EbEE <- function(Omega, Alpha, Beta, eps, r = 10, model) {
                 Omega <- rep(0, nbind)
                 B <- rep(0, nbind)
                 A <- diag(rep(0, nbind))
-                # SD <- matrix(0, nrow = nbind, ncol = (nbind + 2))
+
                 Res <- matrix(0, nrow = (n - r), ncol = nbind)
                 for (i in 1:nbind) {
                     QMLE <- estimMgarch.sdiag(Omega[i], Alpha[i,], Beta[i], eps[, i], Ht, r)
                     Omega[i] <- QMLE$coef[1]
                     A[i,] <- QMLE$coef[2:(d + 1)]
                     B[i] <- QMLE$coef[d + 2]
-                    #SD[i,] <- QMLE$sd
+
                     Res[, i] <- QMLE$eta
                 }
                 R <- cor(Res)
-                #        var <- Mgarch.var(Omega, A, B, mat.rend, r)
-                list(Omega = Omega, A = A, B = B, minimum = QMLE$minimum, R = R,Residuals=Res) #SD = SD,, sd.R = var$sd)
+
+                list(Omega = Omega, A = A, B = B, minimum = QMLE$minimum, R = R,Residuals=Res) 
             }
                 else {
                     print("Not a valid model")
