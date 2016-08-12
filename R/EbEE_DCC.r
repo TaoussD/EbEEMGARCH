@@ -72,10 +72,10 @@ GarchDCC.sim <- cmpfun(GarchDCC.sim)
 objf.Rt.DCC <- function(x, eta.star, m, n, r, tol = sqrt(.Machine$double.eps),type) {
 tol = sqrt(.Machine$double.eps)
 S <- inv.vech0(x[1:(m * (m - 1) / 2)])
-#lambda.min<-min(eigen(S)$values)
+
 aalpha <- x[1 + (m * (m - 1) / 2)]
 bbeta <- x[2 + (m * (m - 1) / 2)]
-#if(lambda.min<tol|(aalpha+bbeta)>1-tol)
+
 if (!all(is.finite(x)) | (aalpha + bbeta) > 1 - tol) {
     qml <- Inf
 } else {
